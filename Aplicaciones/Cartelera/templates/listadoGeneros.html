@@ -1,0 +1,62 @@
+{%extends "./plantilla.html"%} {%block body%}
+<br />
+<div class="card">
+  <div class="card-title text-center">
+    <h3><b>Listado de generos</b></h3>
+  </div>
+</div>
+<div class="text-end">
+  <a href="{% url 'nuevoGenero' %}" class="btn btn-success">Agregar Genero</a>
+</div>
+<table class="table table-bordered table-striped table-hover" id="tbl-generos">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Foto</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for generosTemporal in generos%}
+    <tr>
+      <td>{{generosTemporal.id}}</td>
+      <td>{{generosTemporal.nombre}}</td>
+      <td>
+        {% if generosTemporal.foto %}
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{generosTemporal.foto.url}}" alt="" height=100px width=100px>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a download href="{{generosTemporal.foto.url}}">Descargar</a>
+            <a href="{{generosTemporal.foto.url}}" target="_blank">Visualizar</a>
+          </div>
+        </div>
+        {% else %}
+                              No disponible
+        {% endif %}
+      </td>
+      <td>
+        <a
+          href="{% url 'editarGenero' generosTemporal.id%}"
+          class="btn btn-warning"
+          >Editar</a
+        >
+        
+        <!--Confirmacion de eliminar-->
+        <a
+          href="{% url 'eliminarGenero' generosTemporal.id %}"
+          class="btn btn-danger"
+          onclick="return confirm('Esta seguro?')"
+          >Eliminar</a
+        >
+      </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+<script>
+  let table = new DataTable("#tbl-generos");
+</script>
+{%endblock%}

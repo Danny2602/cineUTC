@@ -1,0 +1,74 @@
+{% extends "./plantilla.html"%} {% block body%}
+{% load static %}
+<h1>Añadir genero</h1>
+<br>
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-md-4">
+      <form action="{% url 'guardarGenero' %}" method="post" enctype="multipart/form-data" id='frm_nuevo_genero'>
+        {% csrf_token %}
+        <label for=""><b>Nombre:</b></label>
+        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="ingrese el nombre del genero" />
+        <br>
+        <label for=""><b>Descripcion:</b></label>
+        <textarea name="descripcion" class="form-control" id="descripcion" rows="3"
+          placeholder="ingrese la descripcion"></textarea>
+        <br>
+        <label><b>FotoGrafias:</b></label>
+        <input type="file" name="foto" id="foto" required class="form-control" accept="image/">
+        <br />
+        <!--
+        <br>
+        <center>
+          <img src="{% static 'img/carrucel1.jpg' %}" alt="" id="img" height="300px" width="300px">
+        </center>
+        <br>
+        <div class="text-end">
+          <button type="button" id="clearBtn" class="btn btn-primary"><i class="fa-solid fa-trash-can"></i> </button>
+          <a href="{% static 'img/carrucel1.jpg' %}" data-lightbox="footerGallery-1" id="maximizeLink"
+            class="btn btn-primary"><i class="fa-solid fa-maximize"></i></a>
+        </div>-->
+        <br> <br>
+
+        <button type="submit" class="btn btn-info">Guardar</button>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <a href="{% url 'listadoGeneros' %}" class="btn btn-danger">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+  $("#frm_nuevo_genero").validate({
+    rules: {//reglas para los inputs 
+      nombre: {//nombre que le asignamos a los inputs
+        required: true,//el campo es requerido 
+        minlength: 3,
+        maxlength: 10,
+      },
+      descripcion: {
+        required: true
+      },
+      foto: {
+        required: true
+      }
+    },
+    messages: {
+      nombre: {//nombre que le asignamos a los inputs
+        required: "Por favor ingrese el nombre",//el mensaje que se presentara al usuario
+        minlength: "el nombre debe tener minimo 3 letras",
+        maxlength: "el nombre debe tener maximo 10 letras",
+      },
+      descripcion: {
+        required: "La descripcion es obligatorio"
+      },
+      foto: {
+        required: "Por favor seleccione la foto"
+      }
+
+    }
+  });
+
+</script>
+{%endblock%}

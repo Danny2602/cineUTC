@@ -1,0 +1,57 @@
+{% extends "./plantilla.html" %} {% block body %}
+<h1>EDITAR DIRECTOR</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <form action="{% url 'procesarActualizarDirector' %}" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{directorEditar.id}}" />
+        <label for=""><b>DNI:</b></label>
+        <input
+          type="text"
+          name="dni"
+          class="form-control"
+          value="{{directorEditar.dni}}"
+          id="dni"
+          placeholder="Ingrese el dni"
+        />
+        <label for=""><b>Apellido:</b></label>
+        <input
+          type="text"
+          name="apellido"
+          class="form-control"
+          value="{{directorEditar.apellido}}"
+          id="nombre"
+          placeholder="Ingrese el apellido"
+        />
+        <label for=""><b>Nombre:</b></label>
+        <input
+          type="text"
+          name="nombre"
+          class="form-control"
+          value="{{directorEditar.nombre}}"
+          id="nombre"
+          placeholder="Ingrese el nombre "
+        />
+        <label for=""><b>Estado:</b></label>
+        <input
+          type="checkbox"
+          name="estado"
+          {% if directorEditar.estado %}checked{% endif %}
+          id="estado"
+          
+        /><br>
+        <label><b>FotoGrafia:</b></label>
+        <img src="{{directorEditar.fotografia.url}}">
+        <input type="file" name="fotografia" id="fotografia" required class="form-control" accept="image/" value="{{directorEditar.fotografia.url}}">
+
+        <br />
+        <button type="submit" class="btn btn-warning">Actualizar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'listadoDirectores' %}">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+{% endblock %}
