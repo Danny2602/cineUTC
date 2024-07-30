@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-pp5!=2ddigrx2ho8wexry%p*mhk^5&-yu5k7wm+hyzhvge19&%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS= os.getenv('ALLOW_HOSTS','').split(',')    
+ALLOWED_HOSTS= os.getenv('ALLOW_HOSTS','cineutc-bx1z.onrender.com').split(',')    
 # ALLOWED_HOSTS = []
 
 
